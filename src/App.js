@@ -1,9 +1,11 @@
 import { Toaster } from "react-hot-toast";
+import { RouterProvider } from "react-router-dom";
+import router from "./Routes/Router/Router";
 
 function App() {
   return (
     <div className="max-w-[1440px] mx-auto">
-      <h1 className="text-secondary text-4xl">HEllo world</h1>
+      <RouterProvider router={router} ></RouterProvider>
       <Toaster></Toaster>
     </div>
   );
