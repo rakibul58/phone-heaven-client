@@ -50,7 +50,7 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input name='password' type="text" placeholder="password" className="input input-bordered" />
+                                <input name='password' type="password" placeholder="password" className="input input-bordered" />
                             </div>
                             <div className="form-control mt-3">
                                 <p>Do not Have an Account? <strong><Link className='text-accent' to='/register'>Register</Link></strong></p>

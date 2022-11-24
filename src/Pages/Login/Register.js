@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import img from '../../assets/login/undraw_secure_login_pdn4.svg';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -18,10 +19,34 @@ const Register = () => {
 
         createUser(email, password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
+                const newUser = {
+                    name,
+                    email,
+                    isSeller: role
+                }
+                addUser(newUser);
+                form.reset();
             })
             .catch(error => setError(error.message));
+    }
+
+    const addUser = user => {
+        // console.log(user);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success("You Have Registered Successfully");
+                    setError("");
+                }
+            });
     }
 
     return (
