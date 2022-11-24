@@ -4,6 +4,7 @@ import img from '../../../assets/navbar/no_image-removebg-preview.png';
 
 const Navbar = () => {
     const navElements = <>
+        <li><Link to='/'>Home</Link></li>
         <li><Link to='/login'>Login</Link></li>
     </>
     return (
@@ -18,7 +19,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <img className='w-[80px] mr-[-45px]' src={img} alt="" />
-                <Link className="btn btn-ghost normal-case text-3xl bg-clip-text bg-gradient-to-r from-accent to-secondary text-transparent font-extrabold">Phone Heaven</Link>
+                <Link className="btn btn-ghost normal-case text-xl sm:text-3xl bg-clip-text bg-gradient-to-r from-accent to-secondary text-transparent font-extrabold">Phone Heaven</Link>
             </div>
             <div className="navbar-end hidden lg:flex font-semibold text-accent text-xl">
                 <ul className="menu menu-horizontal p-0">
