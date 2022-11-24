@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../../assets/navbar/no_image-removebg-preview.png';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Navbar = () => {
+    const { user } = useContext(AuthContext);
     const navElements = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/login'>Login</Link></li>
+        {
+            !user ? <>
+                <li><Link to='/login'>Login</Link></li>
+            </>
+                : <>
+                    <li><button className='btn btn-accent btn-outline rounded-lg'>Logout</button></li>
+                </>
+        }
     </>
     return (
         <div className="navbar bg-base-100 py-5">
