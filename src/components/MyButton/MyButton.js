@@ -1,10 +1,12 @@
 import React from 'react';
 
-const MyButton = () => {
+const MyButton = ({children}) => {
     return (
-        <div>
-            
-        </div>
+        <button
+        className='btn btn-info btn-outline'
+        >
+            {children}
+        </button>
     );
 };
 
