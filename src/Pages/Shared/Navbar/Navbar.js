@@ -4,7 +4,14 @@ import img from '../../../assets/navbar/no_image-removebg-preview.png';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Navbar = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(res => { })
+            .catch(error => console.error(error));
+    }
+
     const navElements = <>
         <li><Link to='/'>Home</Link></li>
         {
@@ -12,7 +19,7 @@ const Navbar = () => {
                 <li><Link to='/login'>Login</Link></li>
             </>
                 : <>
-                    <li><button className='btn btn-accent btn-outline rounded-lg'>Logout</button></li>
+                    <li><button onClick={handleLogOut} className='btn btn-accent btn-outline rounded-lg'>Logout</button></li>
                 </>
         }
     </>
