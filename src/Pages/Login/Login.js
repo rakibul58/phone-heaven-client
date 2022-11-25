@@ -4,10 +4,13 @@ import img from '../../assets/login/undraw_secure_login_pdn4.svg';
 import google from '../../assets/login/google.png';
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const { logIn, googleLogin } = useContext(AuthContext);
     const [error, setError] = useState("");
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -18,6 +21,7 @@ const Login = () => {
         logIn(email, password)
             .then(result => {
                 setError("");
+                setLoginUserEmail(email);
                 form.reset();
             })
             .catch(error => setError(error.message));
@@ -28,6 +32,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 setError("");
+                setLoginUserEmail(user?.email);
                 const newUser = {
                     name: user?.displayName,
                     email: user?.email,

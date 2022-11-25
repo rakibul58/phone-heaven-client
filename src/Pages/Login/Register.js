@@ -3,11 +3,14 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import img from '../../assets/login/undraw_secure_login_pdn4.svg';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
     const [error, setError] = useState('');
+    const [createdUserEmail, setCreateUserEmail] = useState('');
+    const [token] = useToken(createdUserEmail);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -41,7 +44,7 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                setCreateUserEmail(user.email);
                 if (data.acknowledged) {
                     toast.success("You Have Registered Successfully");
                     setError("");
