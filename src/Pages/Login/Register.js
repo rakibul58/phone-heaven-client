@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import img from '../../assets/login/undraw_secure_login_pdn4.svg';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
@@ -11,6 +11,11 @@ const Register = () => {
     const [error, setError] = useState('');
     const [createdUserEmail, setCreateUserEmail] = useState('');
     const [token] = useToken(createdUserEmail);
+    const navigate = useNavigate();
+
+    if (token) {
+        navigate('/');
+    }
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -25,7 +30,7 @@ const Register = () => {
                 const newUser = {
                     name,
                     email,
-                    isSeller: role
+                    role: role
                 }
                 addUser(newUser);
                 form.reset();
@@ -85,8 +90,8 @@ const Register = () => {
                                     <span className="label-text">Role</span>
                                 </label>
                                 <select placeholder='Select Your Role' name='role' className="select select-bordered w-full">
-                                    <option value={true}>Seller</option>
-                                    <option value={false}>User</option>
+                                    <option value='seller'>Seller</option>
+                                    <option value='user'>User</option>
                                 </select>
                             </div>
                             <div className="form-control mt-3">

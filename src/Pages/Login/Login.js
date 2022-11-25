@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/login/undraw_secure_login_pdn4.svg';
 import google from '../../assets/login/google.png';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -11,6 +11,14 @@ const Login = () => {
     const [error, setError] = useState("");
     const [loginUserEmail, setLoginUserEmail] = useState('');
     const [token] = useToken(loginUserEmail);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -36,7 +44,7 @@ const Login = () => {
                 const newUser = {
                     name: user?.displayName,
                     email: user?.email,
-                    isSeller: "false"
+                    role: "user"
                 }
                 addUser(newUser);
             })
@@ -55,6 +63,7 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                setLoginUserEmail(newUser?.email);
                 if (data.acknowledged) {
                     toast.success("You Have Registered Successfully");
                     setError("");
