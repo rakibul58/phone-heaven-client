@@ -5,6 +5,7 @@ import google from '../../assets/login/google.png';
 import { AuthContext } from '../../contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
+import MyTitle from '../../components/MyTitle/MyTitle';
 
 const Login = () => {
     const { logIn, googleLogin } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const Login = () => {
     }
 
     const handleGoogleLogin = () => {
+        // setError('');
         googleLogin()
             .then(result => {
                 const user = result.user;
@@ -62,10 +64,9 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                setLoginUserEmail(newUser?.email);
+                console.log(newUser.email);
                 if (data.acknowledged) {
-                    toast.success("You Have Registered Successfully");
+                    toast.success("You Have Registered Successfully.");
                     setError("");
                 }
             });
@@ -73,6 +74,7 @@ const Login = () => {
 
     return (
         <div className='px-3 md:px-10'>
+            <MyTitle>Login</MyTitle>
             <div className="my-20">
                 <div className="flex flex-col items-center lg:flex-row gap-5">
                     <div className="text-center lg:pr-40 mb-5">

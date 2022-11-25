@@ -2,9 +2,13 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../../assets/navbar/no_image-removebg-preview.png';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useSeller from '../../../hooks/useSeller';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isSeller] = useSeller(user?.email);
+
+    // console.log(isSeller);
 
     const handleLogOut = () => {
         logOut()
@@ -19,6 +23,9 @@ const Navbar = () => {
                 <li><Link to='/login'>Login</Link></li>
             </>
                 : <>
+                    {
+                        isSeller && <li><Link to='/sellerDashboard'>Dashboard</Link></li>
+                    }
                     <li><button onClick={handleLogOut} className='btn btn-accent btn-outline rounded-lg'>Logout</button></li>
                 </>
         }

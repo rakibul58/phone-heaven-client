@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import img from '../../assets/login/undraw_secure_login_pdn4.svg';
+import MyTitle from '../../components/MyTitle/MyTitle';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
 
@@ -59,6 +60,7 @@ const Register = () => {
 
     return (
         <div className='px-3 md:px-10'>
+            <MyTitle>Register</MyTitle>
             <div className="my-20">
                 <div className="flex flex-col lg:flex-row items-center gap-5">
                     <div className="text-center lg:pr-40 mb-5">
