@@ -93,7 +93,7 @@ const Register = () => {
                                 </label>
                                 <select placeholder='Select Your Role' name='role' className="select select-bordered w-full">
                                     <option value='seller'>Seller</option>
-                                    <option value='user'>User</option>
+                                    <option value='user'>Buyer</option>
                                 </select>
                             </div>
                             <div className="form-control mt-3">
