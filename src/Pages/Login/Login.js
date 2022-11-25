@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/login/undraw_secure_login_pdn4.svg';
 import google from '../../assets/login/google.png';
 import { AuthContext } from '../../contexts/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const { logIn, googleLogin } = useContext(AuthContext);
@@ -25,9 +26,35 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
+                const user = result.user;
                 setError("");
+                const newUser = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    isSeller: "false"
+                }
+                addUser(newUser);
             })
             .catch(error => setError(error.message));
+    }
+
+    const addUser = newUser => {
+        // console.log(user);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success("You Have Registered Successfully");
+                    setError("");
+                }
+            });
     }
 
     return (
