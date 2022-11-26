@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const MyPhones = () => {
     const { user } = useContext(AuthContext);
 
-    const { data: phones = [] } = useQuery({
+    const { data: phones = [], refetch } = useQuery({
         queryKey: ['phones'],
         queryFn: async () => {
             try {
@@ -23,13 +24,27 @@ const MyPhones = () => {
         }
     });
 
-    console.log(phones);
+    const handleAdvertise = id => {
+        fetch(`http://localhost:5000/phones/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Successfully Added to the Advertisement');
+                    refetch();
+                }
+            });
+    }
 
     return (
         <div className='mt-6 ml-6'>
             <h1 className='text-accent text-3xl font-semibold'>My Phones</h1>
             <div className="overflow-x-auto w-full mt-5">
-                {phones.length === 0 && <p className='text-2xl'>You Don't Have Any Phones, Please <Link className='link link-accent no-underline' to='/dashboard/addphone'>Add a Phone</Link></p> }
+                {phones.length === 0 && <p className='text-2xl'>You Don't Have Any Phones, Please <Link className='link link-accent no-underline' to='/dashboard/addphone'>Add a Phone</Link></p>}
                 {phones.length > 0 && <table className="table w-full">
                     <thead>
                         <tr>
@@ -57,11 +72,14 @@ const MyPhones = () => {
                                 <td>
                                     {phone.price}
                                 </td>
-                                <td>{phone?.status ? <p>Sold</p> : <p>Unsold</p>}</td>
+                                <td className='font-bold'>{phone?.status==="sold" ? <p className='text-success'>Sold</p> : <p className='text-blue-400'>Unsold</p>}</td>
                                 <td>
                                     <button className="btn btn-error hover:bg-opacity-90 btn-xs mr-3 font-bold">Delete</button>
                                     {
-                                        !phone?.status && <button className="btn btn-warning hover:bg-opacity-90 btn-xs font-bold">Advertise</button>
+                                        !phone?.advertised &&
+                                        phone?.status === "unsold" &&
+                                        <button onClick={() => handleAdvertise(phone._id)} className="btn btn-warning hover:bg-opacity-90 btn-xs font-bold"
+                                        >Advertise</button>
                                     }
                                 </td>
                             </tr>)

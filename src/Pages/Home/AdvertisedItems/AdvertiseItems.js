@@ -7,7 +7,7 @@ const AdvertiseItems = () => {
             <h1 className='font-semibold text-3xl mt-3'>These are Our Advertised Items</h1>
             <div>
                 {
-                    "coming soon"
+                    
                 }
             </div>
         </div>
