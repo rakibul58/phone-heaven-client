@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MyButton from '../../../components/MyButton/MyButton';
-import img from '../../../assets/shared/A-404-Page-Best-Practices-and-Design-Inspiration.jpg';
+import img from '../../../assets/shared/A-404-Page-Best-Practices-and-Design-Inspiration.png';
 
 const ErrorPage = () => {
     return (
