@@ -59,7 +59,7 @@ const AddPhones = () => {
                     const phone = {
                         seller: currentUser.name,
                         email: currentUser.email,
-                        verified: currentUser.verified ? true : false ,
+                        verified: currentUser?.verified ? true : false ,
                         category: data.category,
                         condition: data.condition,
                         description: data.description,
