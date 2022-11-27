@@ -17,7 +17,9 @@ const BookingModal = ({setPhoneInfo, phoneInfo, currentUser , refetch }) => {
             customer_id: currentUser._id,
             customer_number,
             meeting_location,
-            price: phoneInfo.price
+            price: phoneInfo.price,
+            phone_id: phoneInfo._id,
+            model: phoneInfo.model,
 
         }
 

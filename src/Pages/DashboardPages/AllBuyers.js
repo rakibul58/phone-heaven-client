@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
-    const { data: buyers = [] } = useQuery({
+    const { data: buyers = [] , refetch} = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
             try {
@@ -18,6 +19,23 @@ const AllBuyers = () => {
             }
         }
     });
+
+    const handleDeleteBuyer = (id) => {
+        fetch(`http://localhost:5000/buyers/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success('Successfully Removed the Buyer');
+                    refetch();
+                }
+            });
+    }
+
     return (
         <div className='ml-6 mt-6'>
             <h1 className='text-accent text-opacity-90 text-4xl font-semibold'>All Buyers</h1>
@@ -34,12 +52,12 @@ const AllBuyers = () => {
                     <tbody>
                         {
                             buyers.map((buyer, i) => <tr
-                            key={buyer._id}
+                                key={buyer._id}
                             >
-                                <th>{i+1}</th>
+                                <th>{i + 1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
-                                <td>Blue</td>
+                                <td><button onClick={()=>handleDeleteBuyer(buyer._id , buyer.email)} className='btn btn-xs btn-error mr-2 hover:bg-opacity-90'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>

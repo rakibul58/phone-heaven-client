@@ -65,7 +65,7 @@ const MyPhones = () => {
                     <thead>
                         <tr>
                             <th>Phone</th>
-                            <th>Price</th>
+                            <th>Price (Taka)</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -88,9 +88,10 @@ const MyPhones = () => {
                                 <td>
                                     {phone.price}
                                 </td>
-                                <td className='font-bold'>{phone?.status === "sold" ? <p className='text-success'>Sold</p> : <p className='text-blue-400'>Unsold</p>}</td>
+                                <td className='font-bold uppercase'>{phone?.status === "sold" ? <p className='text-success'>Sold</p> : <p className='text-blue-400'>{phone?.status}</p>}</td>
                                 <td>
-                                    <button onClick={() => handleDeletePhone(phone._id)} className="btn btn-error hover:bg-opacity-90 btn-xs mr-3 font-bold">Delete</button>
+                                    
+                                        <button onClick={() => handleDeletePhone(phone._id)} className="btn btn-error hover:bg-opacity-90 btn-xs mr-3 font-bold">Delete</button>
                                     {
                                         !phone?.advertised &&
                                         phone?.status === "unsold" &&
