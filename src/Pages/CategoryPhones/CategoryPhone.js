@@ -4,12 +4,14 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useSeller from '../../hooks/useSeller';
 import useAdmin from '../../hooks/useAdmin';
+import { useQuery } from '@tanstack/react-query';
 
 const CategoryPhone = ({ phone }) => {
-    const { image, price, model, seller, post_date , verified , original_price , used_for , location} = phone;
+    const { image, price, model, seller, post_date , original_price , used_for , location , verified} = phone;
     const { user } = useContext(AuthContext);
     const [isSeller] = useSeller(user?.email);
     const [isAdmin] = useAdmin(user?.email);
+
 
     const handleClick = () =>{
         if(isAdmin || isSeller){
