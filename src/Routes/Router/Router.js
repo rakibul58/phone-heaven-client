@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <Main></Main>,
         errorElement: <ErrorPage></ErrorPage>,
-        children:[
+        children: [
             {
                 path: '/',
                 element: <Home></Home>
@@ -35,8 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <CategoryPhones></CategoryPhones>,
-                loader: ({params})=>fetch(`http://localhost:5000/categories/${params.id}`)
+                element: <PrivateRoute><CategoryPhones></CategoryPhones></PrivateRoute>,
             }
         ]
     },
@@ -44,7 +43,7 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard></Dashboard>,
         errorElement: <ErrorPage></ErrorPage>,
-        children:[
+        children: [
             {
                 path: '/dashboard',
                 element: <PrivateRoute><Profile></Profile></PrivateRoute>
