@@ -4,17 +4,34 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useUser from '../../hooks/useUser';
 
-const CategoryPhone = ({ phone , setPhoneInfo}) => {
-    const { image, price, model, seller, post_date, original_price, used_for, location, verified } = phone;
+const CategoryPhone = ({ phone, setPhoneInfo, refetch , currentUser}) => {
+    const { image, price, model, seller, post_date, original_price, used_for, location, verified, reported } = phone;
     const { user } = useContext(AuthContext);
     const [isUser] = useUser(user?.email);
 
 
     const handleClick = () => {
-            toast.error("Your Have to have a Buyer Account to Book a Phone");
+        toast.error("Your Have to have a Buyer Account to Book a Phone");
     }
     const handleReport = () => {
-            toast.error("Your Have to have a Buyer Account to Report");
+        toast.error("Your Have to have a Buyer Account to Report");
+    }
+
+    const handleAddToReport = (id) => {
+
+        
+        fetch(`http://localhost:5000/reports/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(result => {
+                toast.success(`${phone.model} Reported Successfully`);
+                refetch();
+            });
     }
 
     return (
@@ -36,19 +53,19 @@ const CategoryPhone = ({ phone , setPhoneInfo}) => {
                         <div>Posted at <strong>{post_date}</strong></div>
                         {
                             isUser ? <div>
-                                <label onClick={()=>setPhoneInfo(phone)} htmlFor="booking-modal" className="btn btn-sm btn-outline text-white hover:bg-white mr-2">Book Now</label>
-                                <button className="btn btn-sm btn-error hover:bg-opacity-90">Report</button>
+                                <label onClick={() => setPhoneInfo(phone)} htmlFor="booking-modal" className="btn btn-sm btn-outline text-white hover:bg-white mr-2">Book Now</label>
+                                {!reported && <button onClick={() => handleAddToReport(phone._id)} className="btn btn-sm btn-error hover:bg-opacity-90">Report</button>}
                             </div>
-                            :
-                            <div>
-                                <button onClick={handleClick} className="btn btn-sm btn-outline text-white hover:bg-white mr-2">Book Now</button>
-                                <button onClick={handleReport} className="btn btn-sm btn-error hover:bg-opacity-90">Report</button>
-                            </div>
+                                :
+                                <div>
+                                    <button onClick={handleClick} className="btn btn-sm btn-outline text-white hover:bg-white mr-2">Book Now</button>
+                                    <button onClick={handleReport} className="btn btn-sm btn-error hover:bg-opacity-90">Report</button>
+                                </div>
                         }
                     </div>
                 </div>
             </div>
-            
+
         </div>
     );
 };

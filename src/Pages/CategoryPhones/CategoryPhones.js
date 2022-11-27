@@ -79,7 +79,9 @@ const CategoryPhones = () => {
                                 phones.map(phone => phone.status==="unsold" && <CategoryPhone
                                     key={phone._id}
                                     phone={phone}
+                                    refetch={refetch}
                                     setPhoneInfo={setPhoneInfo}
+                                    currentUser={currentUser}
                                 ></CategoryPhone>)
                             }
                         </div>
