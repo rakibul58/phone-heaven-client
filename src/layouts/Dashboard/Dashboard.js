@@ -28,7 +28,10 @@ const Dashboard = () => {
 
                         {/* <li><Link className='bg-base-300 bg-opacity-60 hover:bg-opacity-20' to='/dashboard'>My Profile</Link></li> */}
                         {
-                            isUser && <li><Link className='bg-base-300 bg-opacity-60 hover:bg-opacity-20' to='/dashboard'>Profile</Link></li>
+                            isUser && <>
+                                <li><Link className='bg-base-300 bg-opacity-60 hover:bg-opacity-20' to='/dashboard'>Profile</Link></li>
+                                <li><Link className='bg-base-300 bg-opacity-60 hover:bg-opacity-20' to='/dashboard/bookings'>My Bookings</Link></li>
+                            </>
                         }
                         {
                             isSeller && <>

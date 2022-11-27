@@ -5,6 +5,7 @@ import CategoryPhones from "../../Pages/CategoryPhones/CategoryPhones";
 import AddPhones from "../../Pages/DashboardPages/AddPhones";
 import AllBuyers from "../../Pages/DashboardPages/AllBuyers";
 import AllSellers from "../../Pages/DashboardPages/AllSellers";
+import MyBookings from "../../Pages/DashboardPages/MyBookings";
 import MyPhones from "../../Pages/DashboardPages/MyPhones";
 import Profile from "../../Pages/DashboardPages/Profile";
 import ReportedItems from "../../Pages/DashboardPages/ReportedItems";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myphones',
                 element: <SellerRoute><MyPhones></MyPhones></SellerRoute>
+            },
+            {
+                path: '/dashboard/bookings',
+                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
             }
         ]
     }
