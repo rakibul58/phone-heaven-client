@@ -40,6 +40,22 @@ const MyPhones = () => {
             });
     }
 
+    const handleDeletePhone = id => {
+        fetch(`http://localhost:5000/phones/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success('Successfully Deleted the Phone');
+                    refetch();
+                }
+            });
+    }
+
     return (
         <div className='mt-6 ml-6'>
             <h1 className='text-accent text-3xl font-semibold'>My Phones</h1>
@@ -72,9 +88,9 @@ const MyPhones = () => {
                                 <td>
                                     {phone.price}
                                 </td>
-                                <td className='font-bold'>{phone?.status==="sold" ? <p className='text-success'>Sold</p> : <p className='text-blue-400'>Unsold</p>}</td>
+                                <td className='font-bold'>{phone?.status === "sold" ? <p className='text-success'>Sold</p> : <p className='text-blue-400'>Unsold</p>}</td>
                                 <td>
-                                    <button className="btn btn-error hover:bg-opacity-90 btn-xs mr-3 font-bold">Delete</button>
+                                    <button onClick={() => handleDeletePhone(phone._id)} className="btn btn-error hover:bg-opacity-90 btn-xs mr-3 font-bold">Delete</button>
                                     {
                                         !phone?.advertised &&
                                         phone?.status === "unsold" &&

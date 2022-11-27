@@ -70,7 +70,8 @@ const AddPhones = () => {
                         phone: data.phone,
                         price: data.price,
                         used_for: data.used_for,
-                        post_date: new Date().toDateString()
+                        post_date: new Date().toDateString(),
+                        status: "unsold"
                     };
 
                     fetch('http://localhost:5000/phones', {
