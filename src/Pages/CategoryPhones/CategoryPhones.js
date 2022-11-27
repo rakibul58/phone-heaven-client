@@ -1,11 +1,13 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData, useNavigation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MyTitle from '../../components/MyTitle/MyTitle';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useAdmin from '../../hooks/useAdmin';
 import useSeller from '../../hooks/useSeller';
 import useUser from '../../hooks/useUser';
+import BookingModal from './BookingModal';
 import CategoryPhone from './CategoryPhone';
 
 const CategoryPhones = () => {
@@ -18,17 +20,45 @@ const CategoryPhones = () => {
     const [isUser] = useUser(user?.email);
 
     const [category, setCategory] = useState({});
-    const [phones, setPhones] = useState([]);
+    // const [phones, setPhones] = useState([]);
+    const [phoneInfo, setPhoneInfo] = useState(null);
+
+
+    const { data: currentUser = [] } = useQuery({
+        queryKey: ['currentUser'],
+        queryFn: async () => {
+            try {
+                const res = await fetch(`http://localhost:5000/users?email=${user?.email}`, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                const data = res.json();
+                return data;
+            } catch (error) {
+
+            }
+        }
+    });
 
     useEffect(() => {
         axios.get(`http://localhost:5000/categories/${id}`)
             .then(res => setCategory(res.data))
     }, [id]);
 
-    useEffect(() => {
-        axios.get(`http://localhost:5000/phones/${id}`)
-            .then(res => setPhones(res.data))
-    }, [id]);
+
+    const { data: phones = [] , refetch} = useQuery({
+        queryKey: ['phones'],
+        queryFn: async () => {
+            try {
+                const res = await fetch(`http://localhost:5000/phones/${id}`);
+                const data = res.json();
+                return data;
+            } catch (error) {
+
+            }
+        }
+    });
 
     // console.log(category);
 
@@ -46,14 +76,19 @@ const CategoryPhones = () => {
                         </div>
                         <div className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-12 mb-24'>
                             {
-                                phones.map(phone => <CategoryPhone
+                                phones.map(phone => phone.status==="unsold" && <CategoryPhone
                                     key={phone._id}
                                     phone={phone}
+                                    setPhoneInfo={setPhoneInfo}
                                 ></CategoryPhone>)
                             }
                         </div>
                     </>
             }
+            {
+                phoneInfo && <BookingModal setPhoneInfo={setPhoneInfo} phoneInfo={phoneInfo} currentUser={currentUser} refetch={refetch}></BookingModal>
+            }
+
         </div>
     );
 };

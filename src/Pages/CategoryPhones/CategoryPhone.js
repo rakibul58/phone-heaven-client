@@ -2,24 +2,19 @@ import React, { useContext } from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
-import useSeller from '../../hooks/useSeller';
-import useAdmin from '../../hooks/useAdmin';
-import { useQuery } from '@tanstack/react-query';
+import useUser from '../../hooks/useUser';
 
-const CategoryPhone = ({ phone }) => {
-    const { image, price, model, seller, post_date , original_price , used_for , location , verified} = phone;
+const CategoryPhone = ({ phone , setPhoneInfo}) => {
+    const { image, price, model, seller, post_date, original_price, used_for, location, verified } = phone;
     const { user } = useContext(AuthContext);
-    const [isSeller] = useSeller(user?.email);
-    const [isAdmin] = useAdmin(user?.email);
+    const [isUser] = useUser(user?.email);
 
 
-    const handleClick = () =>{
-        if(isAdmin || isSeller){
+    const handleClick = () => {
             toast.error("Your Have to have a Buyer Account to Book a Phone");
-            return;
-        }
-
-        toast.success("Phone Booked Successfully");
+    }
+    const handleReport = () => {
+            toast.error("Your Have to have a Buyer Account to Report");
     }
 
     return (
@@ -38,11 +33,22 @@ const CategoryPhone = ({ phone }) => {
                     </div>
                     <div className="card-actions flex-col items-end">
                         <div className="">Posted by <strong>{seller}</strong> {verified && <CheckCircleIcon className='w-5 h-5 inline text-blue-500'></CheckCircleIcon>} </div>
-                        <div>At <strong>{post_date}</strong></div>
-                        <button className='btn btn-outline text-white hover:bg-white' onClick={handleClick}>Book Now</button>
+                        <div>Posted at <strong>{post_date}</strong></div>
+                        {
+                            isUser ? <div>
+                                <label onClick={()=>setPhoneInfo(phone)} htmlFor="booking-modal" className="btn btn-sm btn-outline text-white hover:bg-white mr-2">Book Now</label>
+                                <button className="btn btn-sm btn-error hover:bg-opacity-90">Report</button>
+                            </div>
+                            :
+                            <div>
+                                <button onClick={handleClick} className="btn btn-sm btn-outline text-white hover:bg-white mr-2">Book Now</button>
+                                <button onClick={handleReport} className="btn btn-sm btn-error hover:bg-opacity-90">Report</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 };
