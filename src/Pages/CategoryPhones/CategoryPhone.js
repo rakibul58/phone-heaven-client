@@ -20,7 +20,7 @@ const CategoryPhone = ({ phone, setPhoneInfo, refetch , currentUser}) => {
     const handleAddToReport = (id) => {
 
         
-        fetch(`http://localhost:5000/reports/${id}`, {
+        fetch(`https://mobile-heaven-server.vercel.app/reports/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

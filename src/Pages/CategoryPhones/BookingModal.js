@@ -27,7 +27,7 @@ const BookingModal = ({setPhoneInfo, phoneInfo, currentUser , refetch }) => {
         console.log(booking);
         setPhoneInfo(null);
 
-        fetch(`http://localhost:5000/bookings/${phoneInfo._id}`, {
+        fetch(`https://mobile-heaven-server.vercel.app/bookings/${phoneInfo._id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

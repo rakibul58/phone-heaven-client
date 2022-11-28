@@ -41,7 +41,7 @@ const Register = () => {
 
     const addUser = user => {
         // console.log(user);
-        fetch('http://localhost:5000/users', {
+        fetch('https://mobile-heaven-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -92,8 +92,8 @@ const Register = () => {
                                     <span className="label-text">Role</span>
                                 </label>
                                 <select placeholder='Select Your Role' name='role' className="select select-bordered w-full">
-                                    <option value='seller'>Seller</option>
                                     <option value='user'>Buyer</option>
+                                    <option value='seller'>Seller</option>
                                 </select>
                             </div>
                             <div className="form-control mt-3">

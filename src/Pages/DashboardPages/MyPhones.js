@@ -11,7 +11,7 @@ const MyPhones = () => {
         queryKey: ['phones'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/phones?email=${user?.email}`, {
+                const res = await fetch(`https://mobile-heaven-server.vercel.app/phones?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -25,7 +25,7 @@ const MyPhones = () => {
     });
 
     const handleAdvertise = id => {
-        fetch(`http://localhost:5000/phones/${id}`, {
+        fetch(`https://mobile-heaven-server.vercel.app/phones/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -41,7 +41,7 @@ const MyPhones = () => {
     }
 
     const handleDeletePhone = id => {
-        fetch(`http://localhost:5000/phones/${id}`, {
+        fetch(`https://mobile-heaven-server.vercel.app/phones/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

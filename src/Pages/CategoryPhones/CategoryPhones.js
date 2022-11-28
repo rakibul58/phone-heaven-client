@@ -28,7 +28,7 @@ const CategoryPhones = () => {
         queryKey: ['currentUser'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/users?email=${user?.email}`, {
+                const res = await fetch(`https://mobile-heaven-server.vercel.app/users?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -42,7 +42,7 @@ const CategoryPhones = () => {
     });
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/categories/${id}`)
+        axios.get(`https://mobile-heaven-server.vercel.app/categories/${id}`)
             .then(res => setCategory(res.data))
     }, [id]);
 
@@ -51,7 +51,7 @@ const CategoryPhones = () => {
         queryKey: ['phones'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/phones/${id}`);
+                const res = await fetch(`https://mobile-heaven-server.vercel.app/phones/${id}`);
                 const data = res.json();
                 return data;
             } catch (error) {

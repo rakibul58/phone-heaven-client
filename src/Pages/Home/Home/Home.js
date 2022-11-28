@@ -9,7 +9,7 @@ const Home = () => {
     const [advertisedPhones, setAdvertisedPhones] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/advertisedPhones')
+        fetch('https://mobile-heaven-server.vercel.app/advertisedPhones')
             .then(res => res.json())
             .then(data => setAdvertisedPhones(data));
     }, []);

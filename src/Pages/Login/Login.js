@@ -55,7 +55,7 @@ const Login = () => {
 
     const addUser = newUser => {
         // console.log(user);
-        fetch('http://localhost:5000/users', {
+        fetch('https://mobile-heaven-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

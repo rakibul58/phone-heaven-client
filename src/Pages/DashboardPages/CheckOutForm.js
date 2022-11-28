@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CheckOutForm = ({ booking }) => {
     const [cardError, setCardError] = useState('');
@@ -13,7 +14,7 @@ const CheckOutForm = ({ booking }) => {
     const { price, customer_name, _id , customer_email , phone_id} = booking;
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://mobile-heaven-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -77,7 +78,7 @@ const CheckOutForm = ({ booking }) => {
                 bookingId: _id,
                 phoneId: phone_id
             };
-            fetch('http://localhost:5000/payments', {
+            fetch('https://mobile-heaven-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -90,6 +91,7 @@ const CheckOutForm = ({ booking }) => {
                 .then(data => {
                     if (data.insertedId) {
                         setSuccess('Congrats! your payment completed');
+                        toast.success('Congrats! your payment completed');
                         setTransactionId(paymentIntent.id);
                     }
                 })

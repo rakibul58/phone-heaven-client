@@ -16,7 +16,7 @@ const AddPhones = () => {
         queryKey: ['currentUser'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/users?email=${user?.email}`, {
+                const res = await fetch(`https://mobile-heaven-server.vercel.app/users?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -33,7 +33,7 @@ const AddPhones = () => {
         queryKey: ['categories'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/categories`);
+                const res = await fetch(`https://mobile-heaven-server.vercel.app/categories`);
                 const data = res.json();
                 return data;
             } catch (error) {
@@ -74,7 +74,7 @@ const AddPhones = () => {
                         status: "unsold"
                     };
 
-                    fetch('http://localhost:5000/phones', {
+                    fetch('https://mobile-heaven-server.vercel.app/phones', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

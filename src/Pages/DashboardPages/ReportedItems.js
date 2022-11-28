@@ -8,7 +8,7 @@ const ReportedItems = () => {
         queryKey: ['reports'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/reports`, {
+                const res = await fetch(`https://mobile-heaven-server.vercel.app/reports`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -22,7 +22,7 @@ const ReportedItems = () => {
     });
 
     const handleDeleteSeller = (id) =>{
-        fetch(`http://localhost:5000/reports/${id}`, {
+        fetch(`https://mobile-heaven-server.vercel.app/reports/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -39,7 +39,7 @@ const ReportedItems = () => {
 
     return (
         <div className='ml-6 mt-6'>
-            <h1 className='text-accent text-opacity-90 text-4xl font-semibold'>All Buyers</h1>
+            <h1 className='text-accent text-opacity-90 text-4xl font-semibold'>Reported Items</h1>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full mt-5">
                     <thead className='text-accent'>
