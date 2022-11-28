@@ -7,6 +7,7 @@ import AllBuyers from "../../Pages/DashboardPages/AllBuyers";
 import AllSellers from "../../Pages/DashboardPages/AllSellers";
 import MyBookings from "../../Pages/DashboardPages/MyBookings";
 import MyPhones from "../../Pages/DashboardPages/MyPhones";
+import Payment from "../../Pages/DashboardPages/Payment";
 import Profile from "../../Pages/DashboardPages/Profile";
 import ReportedItems from "../../Pages/DashboardPages/ReportedItems";
 import Home from "../../Pages/Home/Home/Home";
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/bookings',
                 element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+            },
+            {
+                path: `/dashboard/payment/:id`,
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
             }
         ]
     }

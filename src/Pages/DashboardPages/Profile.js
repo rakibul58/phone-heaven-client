@@ -30,7 +30,7 @@ const Profile = () => {
 
     // console.log(currentUser);
     return (
-        <div className='ml-5 mt-6'>
+        <div className='ml-5 mt-6 shadow-2xl pl-8 py-8 rounded-xl bg-base-300'>
             {
                 (!isAdmin && !isSeller && !isUser) ? <>
                     <h1 className='font-bold text-error text-3xl'>Your Account Has Been Deleted</h1>

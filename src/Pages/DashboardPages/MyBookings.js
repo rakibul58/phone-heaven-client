@@ -71,9 +71,9 @@ const MyBookings = () => {
                                                     </Link>
                                                 }
                                                 {
-                                                    booking.price && booking.paid && <button
-                                                        className='btn btn-xs font-bold px-7 btn-secondary'
-                                                    >Paid</button>
+                                                    booking.price && booking.paid && <div
+                                                        className='btn btn-xs font-bold px-7 btn-success' 
+                                                    >Paid</div>
                                                 }
                                             </td>
                                         </tr>)
