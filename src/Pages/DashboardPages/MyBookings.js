@@ -7,7 +7,7 @@ const MyBookings = () => {
 
     const { user } = useContext(AuthContext);
 
-    const { data: bookings = [], refetch } = useQuery({
+    const { data: bookings = [] } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
             try {

@@ -9,7 +9,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const Payment = () => {
     const { id } = useParams();
-    const { data: booking = [], refetch } = useQuery({
+    const { data: booking = [] } = useQuery({
         queryKey: ['booking'],
         queryFn: async () => {
             try {
