@@ -31,6 +31,7 @@ Mobile Heaven is a resale product website. This is website is for reselling mobi
 * React Router DOM
 * Hero Icons
 * React-hot-toast
+* Daisy UI
 
 # Getting Started with Create React App
 
