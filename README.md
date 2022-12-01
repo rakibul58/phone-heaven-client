@@ -1,7 +1,9 @@
 # Mobile Heaven
 
-Live Site Link: https://phone-heaven.web.app/
+Live Site Link: https://phone-heaven.web.app/ 
+
 Admin Email: admin@email.com
+
 Admin Password: 123456
 
 ## Description
