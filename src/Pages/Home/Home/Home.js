@@ -6,6 +6,7 @@ import FAQ from '../FAQ/FAQ';
 import Offer from '../Offer/Offer';
 import Offerings from '../Offerings/Offerings';
 import ProductCategories from '../ProductCategories/ProductCategories';
+import SoldItems from '../SoldItems/SoldItems';
 
 const Home = () => {
     const [advertisedPhones, setAdvertisedPhones] = useState([]);
@@ -20,6 +21,7 @@ const Home = () => {
         <div>
             <MyTitle>Home</MyTitle>
             <Banner></Banner>
+            <SoldItems></SoldItems>
             {
                 advertisedPhones.length > 0 && <AdvertiseItems advertisedPhones={advertisedPhones}></AdvertiseItems>
             }

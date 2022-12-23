@@ -18,7 +18,7 @@ const ProductCategories = () => {
     }
 
     return (
-        <div className='text-center mt-20'>
+        <div className='text-center mt-20 mb-44'>
             <h4 className='font-bold text-xl text-accent'>Categories</h4>
             <h1 className='font-semibold text-3xl mt-3'>See All Second Hand Mobile Categories</h1>
             <div id='categories' className='mt-12 px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
