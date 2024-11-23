@@ -1,36 +1,128 @@
 # Mobile Heaven
 
-Live Site Link: https://phone-heaven.web.app/ 
+- [Live Site](https://phone-heaven.web.app/)
 
-Admin Email: admin@email.com
+A full-stack MERN marketplace application for buying and selling used mobile phones. This repository contains the client-side code.
 
-Admin Password: 123456
+## Features
 
-## Description
+- 🔐 User Authentication with Firebase
+- 👥 Role-based Access Control (Admin, Seller, Buyer)
+- 📱 Browse and Search Used Phones
+- 💰 Secure Payment Integration with Stripe
+- 🎨 Responsive Design with Tailwind CSS & DaisyUI
+- 📝 Product Management for Sellers
+- 🛡️ Protected Routes
+- 📊 Dashboard for Different User Roles
 
-Mobile Heaven is a resale product website. This is website is for reselling mobile phones.It's feature includes:
+## Tech Stack
 
-* Categories are Loaded From Database. Each Category has it's own dynamic route where different phones under that category are shown.
+- React 18
+- React Router DOM v6
+- Firebase Authentication
+- Tailwind CSS
+- DaisyUI Components
+- TanStack Query (React Query)
+- Stripe Payment Integration
+- Axios
+- React Hook Form
+- React Hot Toast
+- React Helmet
 
-* A Buyer can book or report a phone. But the seller and admin cannot book or report. After booking the phone would be not shown so other buyers cannot book it.
+## Getting Started
 
-* A Buyer can see their booked phones. He can buy it and delete it. Payment system is implemented using React stripe. After Buying Pay Button will be gone and in it's place it will show paid.
+### Prerequisites
 
-* A seller can add a phone. He remove his postings and also advertise his posting.
+- Node.js (v14 or higher)
+- npm or yarn
+- Firebase account
+- Stripe account
+- ImgBB account for image hosting
 
-* An Admin can see the buyers and seller. He can remove the buyers and sellers. If the removed buyer or seller logs in again it will their account was deleted. Removing the seller would remove his postings. Admin can also see the reported items and delete them.
+### Installation
 
-### Tools and Technologies
+1. Clone the repository
+```bash
+git clone https://github.com/rakibul58/phone-heaven-client.git
+cd mobile-heaven-client
+```
 
-* HTML
-* Tailwind CSS
-* React JS
-* Node JS
-* Express JS
-* MongoDB
-* Stripe
-* JWT
-* React Router DOM
-* Hero Icons
-* React-hot-toast
-* Daisy UI
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Environment Variables
+
+Create a `.env` file in the root directory:
+```env
+REACT_APP_apiKey=
+REACT_APP_authDomain=
+REACT_APP_projectId=
+REACT_APP_storageBucket=
+REACT_APP_messagingSenderId=
+REACT_APP_appId=
+REACT_APP_imgbb_key=
+REACT_APP_STRIPE_PK=
+```
+
+4. Start the development server
+```bash
+npm start
+```
+
+## Project Structure
+
+```
+src/
+├── components/          # Reusable components
+├── contexts/           # Context providers
+├── hooks/              # Custom hooks
+├── layouts/            # Page layouts
+├── pages/             # Page components
+├── routes/            # Route configurations
+└── firebase/          # Firebase configuration
+```
+
+## Available Scripts
+
+```bash
+# Start the development server
+npm start
+
+# Build for production
+npm start
+
+# Run tests
+npm test
+
+# Eject from Create React App
+npm run eject
+```
+
+## Contributing
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Deployment
+
+The application can be deployed on Netlify or Vercel:
+
+1. Connect your GitHub repository
+2. Configure build settings:
+   - Build command: `npm run build`
+   - Publish directory: `build`
+3. Set up environment variables in the deployment platform
+4. Deploy!
+
+## Related Projects
+
+- [Mobile Heaven Server](https://github.com/rakibul58/phone-heaven-server) - Backend API repository
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
