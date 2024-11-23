@@ -1,4 +1,4 @@
-# Mobile Heaven
+# Phone Heaven
 
 [Live Site](https://phone-heaven.web.app/)
 
