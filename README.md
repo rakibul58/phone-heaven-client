@@ -1,6 +1,6 @@
 # Mobile Heaven
 
-- [Live Site](https://phone-heaven.web.app/)
+##[Live Site](https://phone-heaven.web.app/)
 
 A full-stack MERN marketplace application for buying and selling used mobile phones. This repository contains the client-side code.
 
